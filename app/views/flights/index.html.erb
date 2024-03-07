@@ -1,0 +1,30 @@
+<h1>Welcome </h1>
+
+<h2>you can search for your flights here </h2>
+
+
+<%= form_with url: flights_path, method: :get do |f| %>
+<div>
+    <%= f.label :departure_airport_id, "Departure airport:" %>
+    <%= f.select :departure_airports_id, @airports, { include_blank: 'Select Departure Airport' } %>
+</div>
+    
+<div>
+    <%= f.label :arrival_airport_id, "Arrival airport:" %>
+    <%= f.select :arrival_airport_id, @airports, { include_blank: 'Select Arrival Airport' } %>
+</div>
+
+<div>
+    <%= f.label :passenger_count, 'Number of passengers' %>
+    <%= f.select :passenger_count, (1..4).to_a , { include_blank: 'select Number of Passengers'} %>
+</div>
+
+<div>
+    <%= f.label :date, 'Date' %>
+    <%= f.select :date, @flight_dates, { include_blank: 'Select Flight Date' } %>
+</div>
+<div>
+    <%= f.submit 'Search Flights', class: 'btn btn-primary' %>
+</div>
+    
+<% end %>
