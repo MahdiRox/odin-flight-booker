@@ -1,0 +1,15 @@
+<h1>Booking Information</h1>
+
+<p><strong>Flight_id:</strong> <%= @flight.id %></p>
+<p><strong>Flight duration:</strong> <%= @flight.flight_duration %> houres</p>
+<p><strong>Flight departure_airport:</strong> <%= @flight.departure_airport.name %></p>
+<p><strong>Flight arrival_airport:</strong> <%= @flight.arrival_airport.name %></p>
+
+<h2>Passengers:</h2>
+<% @booking.passengers.each do |passenger| %>
+  <p><strong>Name:</strong> <%= passenger.name %></p>
+  <p><strong>Email:</strong> <%= passenger.email %></p>
+  <!-- Add more passenger details as needed -->
+<% end %>
+
+<%= link_to 'Back to Flights', flights_path %>

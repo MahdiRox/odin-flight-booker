@@ -28,3 +28,31 @@
 </div>
     
 <% end %>
+
+<br>
+<br>
+
+<% if params[:commit] == 'Search Flights' %>
+  <% if @flights.empty? %>
+    <p>Sorry, there are no flights available for your search criteria.</p>
+  <% else %>
+ <%= form_with url: new_booking_path, method: :get do |form| %>
+<%= form.hidden_field :passengers, value: params[:passenger_count] %>
+  <ul>
+    <% @flights.each do |flight| %>
+      <li>
+        <%= form.radio_button :flight_id, flight.id %>
+        <%= "#{flight.departure_airport.code} to #{flight.arrival_airport.code}, #{flight.start_datetime.strftime('%Y-%m-%d %H:%M')}" %>
+      </li>
+    <% end %>
+  </ul>
+    <%= form.submit 'Proceed to Booking', class: 'btn btn-primary' %>
+<% end %>
+
+<% end %>
+
+<% end %>
+
+
+
+

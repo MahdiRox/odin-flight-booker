@@ -9,6 +9,7 @@
 #   end
 
 Airport.delete_all
+Flight.delete_all
 
 airports_data = [
   { code: 'SFO', name: 'San Francisco International Airport' },
@@ -23,12 +24,15 @@ airports_data.each do |airport|
 end
 
 flights_data = [
-    { departure_airport_id: Airport.find_by(code: 'SFO').id, arrival_airport_id: Airport.find_by(code: 'JFK').id, start_datetime: Time.now, flight_duration: 2 },
-    { departure_airport_id: Airport.find_by(code: 'JFK').id, arrival_airport_id: Airport.find_by(code: 'LAX').id, start_datetime: DateTime.now + 1.day, flight_duration: 5 },
-    { departure_airport_id: Airport.find_by(code: 'LAX').id, arrival_airport_id: Airport.find_by(code: 'ORD').id, start_datetime: DateTime.now + 2.days, flight_duration: 4 },
+    { departure_airport_id: Airport.find_by(code: 'SFO').id, arrival_airport_id: Airport.find_by(code: 'JFK').id, start_datetime: DateTime.now, flight_duration: 2.houres },
+    { departure_airport_id: Airport.find_by(code: 'SFO').id, arrival_airport_id: Airport.find_by(code: 'JFK').id, start_datetime: DateTime.now + 44.minutes, flight_duration: 2.houres },
+    { departure_airport_id: Airport.find_by(code: 'SFO').id, arrival_airport_id: Airport.find_by(code: 'JFK').id, start_datetime: DateTime.now + 1.seconds, flight_duration: 2.houres },
+    { departure_airport_id: Airport.find_by(code: 'JFK').id, arrival_airport_id: Airport.find_by(code: 'LAX').id, start_datetime: DateTime.now + 1.day, flight_duration: 5.houres },
+    { departure_airport_id: Airport.find_by(code: 'LAX').id, arrival_airport_id: Airport.find_by(code: 'ORD').id, start_datetime: DateTime.now + 2.days, flight_duration: 4.houres },
   # Add more flights as needed
 ]
 flights_data.each do |flight|
     Flight.create(flight)
     puts "Created flight from #{flight[:departure_airport_id]} to #{flight[:arrival_airport_id]}"
 end  
+
