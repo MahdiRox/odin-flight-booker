@@ -1,4 +1,5 @@
-<h1>New Booking</h1>
+<div data-controller="passenger">
+  <h1>New Booking</h1>
 
 <%= form_with model: @booking do |f| %>
   <%= f.hidden_field :flight_id, value: @flight.id %>
@@ -7,22 +8,42 @@
   flight departure_airport : <%= @flight.departure_airport.code %> 
   <br>
   flight arrival_airport : <%= @flight.arrival_airport.code %>
-  <% @booking.passengers.each_with_index do |passenger, index| %>
-    <div>
-      <h2> <%= "Passenger ##{index + 1}" %> </h2>
-      <%= f.fields_for :passengers, passenger do |passenger_form| %>
-        <!-- Fields for each passenger -->
-        <div>
-          <%= passenger_form.label :name %>
-          <%= passenger_form.text_field :name %>
+  <div id="passengers">
+    <% @booking.passengers.each_with_index do |passenger, index| %>
+      <div data-passenger-target="container">
+        <h2> <%= "Passenger ##{index + 1}" %> </h2>
+        <%= f.fields_for :passengers, passenger do |passenger_form| %>
+          <!-- Fields for each passenger -->
+          <div>
+            <%= passenger_form.label :name %>
+            <%= passenger_form.text_field :name %>
 
-          <%= passenger_form.label :email %>
-          <%= passenger_form.email_field :email %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+            <%= passenger_form.label :email %>
+            <%= passenger_form.email_field :email %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 
   <%= f.submit 'Create Booking' %>
 <% end %>
+
+<template id="passenger-template">
+  <div data-passenger-target="container">
+    <h2>Passenger</h2>
+    <div>
+      <label for="booking_passengers_attributes_new_name">Name</label>
+      <input type="text" name="booking[passengers_attributes][new][name]" id="booking_passengers_attributes_new_name">
+      
+      <label for="booking_passengers_attributes_new_email">Email</label>
+      <input type="email" name="booking[passengers_attributes][new][email]" id="booking_passengers_attributes_new_email">
+    </div>
+  </div>
+</template>
+
+<button data-action="click->passenger#add">Add Passenger</button>
+<div></div>
+<button data-action="click->passenger#delete">delete a Passenger</button>
+</div>
 
