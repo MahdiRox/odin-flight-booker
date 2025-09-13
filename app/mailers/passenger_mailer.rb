@@ -1,5 +1,5 @@
 class PassengerMailer < ApplicationMailer
-  default from: 'no-reply@example.com'
+  default from: 'zohrafarid3123@gmail.com'
   layout 'mailer'
   def confirmation_email(passenger)
     @passenger = params[:passenger] || passenger

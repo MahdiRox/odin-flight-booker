@@ -70,8 +70,21 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter = :resque
   # config.active_job.queue_name_prefix = "odin_flight_booker_production"
-
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_caching = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name: 'apikey', # literally the word "apikey"
+    password: ENV['SENDGRID_API_KEY'], # comes from Koyeb env var
+    domain: 'your-app-name.koyeb.app', # replace with your real app domain or custom domain
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
+
+  config.action_mailer.default_url_options = { host: 'https://retired-dyanna-no-namee-911c49b2.koyeb.app', protocol: 'https' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
